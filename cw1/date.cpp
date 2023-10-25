@@ -1,7 +1,14 @@
 #include "date.h"
+#include <iostream>
+#include <iomanip>
 
-Date::Date() {
-    setDate(1,1,1990);
+#include "utils.h"
+
+using namespace std;
+
+
+Date::Date(const Date &date) {
+    setDate(date.getDay(), date.getMonth(), date.getYear());
 }
 
 Date::Date(int day, int month, int year) {
@@ -9,7 +16,7 @@ Date::Date(int day, int month, int year) {
 }
 
 void Date::setDay(int day) {
-    if(day < 1 || day > 31) {
+    if (day < 1 || day > 31) {
         printf("Invalid day value: %d\n", day);
         return;
     }
@@ -17,7 +24,7 @@ void Date::setDay(int day) {
 }
 
 void Date::setMonth(int month) {
-    if(month < 1 || month > 12) {
+    if (month < 1 || month > 12) {
         printf("Invalid month value: %d\n", month);
         return;
     }
@@ -25,7 +32,7 @@ void Date::setMonth(int month) {
 }
 
 void Date::setYear(int year) {
-    if(year < 0 || year > 9999) {
+    if (year < 0 || year > 9999) {
         printf("Invalid year value: %d\n", year);
         return;
     }
@@ -46,7 +53,7 @@ int Date::getMonth() const {
     return mMonth;
 }
 
-int Date::getYear( ) const {
+int Date::getYear() const {
     return mYear;
 }
 
@@ -54,22 +61,17 @@ void Date::printDate() {
     printf("%d.%d.%d\n", mDay, mMonth, mYear);
 }
 
-ostream& operator << (ostream& os, const Date& date) {
-    os << date.getDay() << "." << date.getMonth() << "." << date.getYear();
+ostream &operator<<(ostream &os, const Date &date) {
+    os << setfill('0')
+        <<setw(2) << date.getDay() << ":"
+        <<setw(2) << date.getMonth() << ":"
+        <<setw(4) << date.getYear();
     return os;
 }
 
-istream& operator >> (istream& is, Date& date) {
-    int day, month, year;
-
-    std::cout << "Enter day: ";
-    is >> day;
-    std::cout << "Enter month: ";
-    is >> month;
-    std::cout << "Enter year: ";
-    is >> year;
-
-    date.setDate(day, month, year);
+istream &operator>>(istream &is, Date &date) {
+    unsigned short *p = readDateFromUser("Podaj date w formacie dd/mm/yyyy", '/', true);
+    date.setDate(p[0], p[1], p[2]);
 
     return is;
 }

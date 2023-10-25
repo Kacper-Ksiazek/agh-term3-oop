@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "DateTime.h"
 // #include "time_proc.h"
 // #include "time_oop.h"
 
@@ -30,9 +31,22 @@ int main() {
 //    t2.printTime();
 
     // 3. Task
-    class Date uro(11,8,2002);
+//    class Date uro(11,8,2002);
+//
+//    uro.printDate();
 
-    uro.printDate();
+    DateTime dt;
+    dt.setDate(23, 10, 2023);
+    cout << "dt = " << dt << endl;
+
+    DateTime dt2(dt);
+    cout << "Podaj date i czas dd/mm/yyyy  hh:mm:ss "<<endl;
+    cout<<"Podawanie czasu dt2\n";
+    cin >> dt2;
+    cout << "dt2 = " << dt2 << endl;
+
+    dt = dt2;
+    cout << "dt = " << dt <<endl;
 
     return 0;
 }

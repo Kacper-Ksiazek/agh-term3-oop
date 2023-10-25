@@ -5,32 +5,32 @@ using namespace std;
 
 class Time {
     public:
-        Time();
-        Time(int hour, int minute, int second);
+        Time(const Time& time);
+        Time(int hour=0, int minute=0, int second=0);
 
     public:
-    // Getters
-    void setHour( int hour);
-    void setMinute( int minute);
-    void setSecond( int second);
-    void setTime( int hour, int minute, int second);
+        // Getters
+        inline void setHour( int hour);
+        inline void setMinute( int minute);
+        inline void setSecond( int second);
+        void setTime( int hour, int minute, int second);
 
-    // Getter
-    int getHour() const;
-    int getMinute() const;
-    int getSecond() const;
+        // Getter
+        inline int getHour() const;
+        inline int getMinute() const;
+        inline int getSecond() const;
 
-    // Other
-    void printTime();
-    void readTime();
+        // Other
+        void printTime();
+        void readTime();
 
-    friend ostream& operator << (ostream& os, const Time& time);
-    friend istream& operator >> (istream& is, Time& time);
+        friend ostream& operator << (ostream& os, const Time& time);
+        friend istream& operator >> (istream& is, Time& time);
 
     private:
-    int mHour{}; // m- member
-    int mMinute{};
-    int mSecond{};
+        int mHour{}; // m- member
+        int mMinute{};
+        int mSecond{};
 };
 
 

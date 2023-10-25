@@ -6,26 +6,31 @@ using namespace std;
 
 // 1. Settery
 
-void Point::setX(double x) {
+inline void Point::setX(double x) {
     mX = x;
 }
 
-void Point::setY(double y) {
+inline void Point::setY(double y) {
     mY = y;
 }
 
 void Point::setPoint(double x, double y) {
-    mX = x;
-    mY = y;
+    setX(x);
+    setY(y);
+}
+
+inline void Point::setPoint(const Point &p) {
+    setX(p.mX);
+    setY(p.mY);
 }
 
 // 2. Gettery
 
-double Point::getX() {
+inline double Point::getX() const {
     return mX;
 }
 
-double Point::getY() {
+inline double Point::getY() const {
     return mY;
 }
 
@@ -47,16 +52,15 @@ istream& operator >>(istream& is, Point& point) {
 
 // 4. Konstruktory
 
-Point::Point() {
-    mX = 0;
-    mY = 0;
+Point::Point(const Point &point) {
+    mX = point.mX;
+    mY = point.mY;
 }
 
 Point::Point(double x, double y) {
     mX = x;
     mY = y;
 }
-
 // 5. Akcje
 
 void Point::Turn(double angleInRads) {
@@ -75,4 +79,5 @@ void Point::Move(double x, double y) {
     setX(getX() + x);
     setY(getY() + y);
 }
+
 

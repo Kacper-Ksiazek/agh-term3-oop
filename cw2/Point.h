@@ -9,21 +9,23 @@ struct Point {
     double mY;
 
     // 1. Settery
-    void setX(double x);
-    void setY(double y);
+    inline void setX(double x);
+    inline void setY(double y);
+
     void setPoint(double x, double y);
+    void setPoint(const Point &point);
 
     // 2. Gettery
-    double getX();
-    double getY();
+    inline double getX() const;
+    inline double getY() const;
 
     // 3. Operatory
     friend ostream& operator << (ostream& os, const Point& point);
     friend istream& operator >> (istream& is, Point& point);
 
     // 4. Konstruktory
-    Point();
-    Point(double x, double y);
+    Point(const Point& point);
+    Point(double x=0, double y=0);
 
     // 5. Akcje
     void Turn(double angle);

@@ -1,70 +1,71 @@
+#include <iostream>
+#include <iomanip>
 #include "time_oop.h"
 
-#include "stdio.h"
-#include "iostream"
+#include "utils.h"
 
-Time::Time(){
-    setTime(0,0,0);
+Time::Time(const Time &time) {
+    *this = time;
 }
-Time::Time(int hour, int minute, int second){
+
+Time::Time(int hour, int minute, int second) {
     setTime(hour, minute, second);
 }
 
-ostream& operator << (ostream& os, const Time& time){
-    os << time.getHour()<< ":" << time.getMinute()<< ":" << time.getSecond();
+ostream &operator<<(ostream &os, const Time &time) {
+    os << std::setfill('0') << std::setw(2) << time.getHour() << ":"
+       << std::setw(2) << time.getMinute() << ":" << std::setw(2) << time.getSecond();
     return os;
 }
 
-istream& operator >> (istream& is, Time& time){
-    int hour, minute, second;
+istream &operator>>(istream &is, Time &time) {
+    unsigned short *dataFromUser = readDateFromUser("Podaj czas w hh:mm:ss formacie", ':', true);
 
-    std::cout << "Enter hour: ";
-    is >> hour;
-    std::cout << "Enter minute: ";
-    is >> minute;
-    std::cout << "Enter second: ";
-    is >> second;
+    if ( dataFromUser == nullptr ) throw runtime_error("Invalid time format!");
+
+    int hour, minute, second;
+    hour = dataFromUser[0], minute = dataFromUser[1], second = dataFromUser[2];
 
     time.setTime(hour, minute, second);
 
     return is;
 }
 
-void Time::setHour( int hour){
-    if(hour < 0 || hour > 23) {
+inline void Time::setHour(int hour) {
+    if (hour < 0 || hour > 23) {
         printf("Invalid hour value: %d\n", hour);
         return;
     }
-    mHour= hour;
+    mHour = hour;
 }
 
-void Time::setMinute( int minute){
-    if(minute < 0 || minute > 59) {
+inline void Time::setMinute(int minute) {
+    if (minute < 0 || minute > 59) {
         printf("Invalid minute value: %d\n", minute);
         return;
     }
-    mMinute= minute;
+    mMinute = minute;
 }
 
-void Time::setSecond( int second){
-    if(second < 0 || second > 59) {
+inline void Time::setSecond(int second) {
+    if (second < 0 || second > 59) {
         printf("Invalid second value: %d\n", second);
         return;
     }
-    mSecond= second;
+    mSecond = second;
 }
 
-void Time::setTime( int hour, int minute, int second) {
+void Time::setTime(int hour, int minute, int second) {
     // Validate received parameters
-    if(hour < 0 || hour > 23) {
+    if (hour < 0 || hour > 23) {
         printf("Invalid hour value: %d\n", hour);
         return;
     }
-    if(minute < 0 || minute > 59) {
+    if (minute < 0 || minute > 59) {
         printf("Invalid minute value: %d\n", minute);
         return;
     }
-    if(second < 0 || second > 59) {
+    if (second < 0 || second > 59) {
         printf("Invalid second value: %d\n", second);
         return;
     }
@@ -74,23 +75,23 @@ void Time::setTime( int hour, int minute, int second) {
     setSecond(second);
 }
 
-int Time::getHour() const{
+inline int Time::getHour() const {
     return mHour;
 }
 
-int Time::getMinute() const{
+inline int Time::getMinute() const {
     return mMinute;
 }
 
-int Time::getSecond() const{
+inline int Time::getSecond() const {
     return mSecond;
 }
 
-void Time::printTime(){
+void Time::printTime() {
     printf("%02d:%02d:%02d\n", getHour(), getMinute(), getSecond());
 }
 
-void Time::readTime(){
+void Time::readTime() {
     int hour, minute, second;
 
     std::cout << "Enter hour: ";
@@ -102,3 +103,4 @@ void Time::readTime(){
 
     setTime(hour, minute, second);
 }
+

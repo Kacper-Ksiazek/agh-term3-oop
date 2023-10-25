@@ -20,21 +20,21 @@ class Segment {
 
     public:
         // 1. Gettery
-        const Point& getPt1() const;
-        const Point& getPt2() const;
+        inline const Point& getPt1() const;
+        inline const Point& getPt2() const;
 
         // 2. Settery
-        void setPt1(Point pt1);
-        void setPt2(Point pt2);
-        void setSeg(Point pt1, Point pt2);
+        inline void setPt1(Point pt1);
+        inline void setPt2(Point pt2);
+        inline void setSeg(Point pt1, Point pt2);
 
        // 3. Operatory
        friend ostream& operator << (ostream& os, const Segment& segment);
        friend istream& operator >> (istream& is, Segment& segment);
 
        // 4. Konstruktory
-       Segment();
-       Segment(double x1, double y1, double x2, double y2);
+       Segment(Point pt1, Point pt2);
+       Segment(double x1=0, double y1=0, double x2=0, double y2=0);
 
        // 5. Akcje
        void Move(double x, double y);

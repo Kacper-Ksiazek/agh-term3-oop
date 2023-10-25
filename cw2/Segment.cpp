@@ -3,24 +3,24 @@
 
 // 1. Gettery
 
-const Point& Segment::getPt1() const {
+inline const Point& Segment::getPt1() const {
     return mPt1;
 }
-const Point& Segment::getPt2() const {
+inline const Point& Segment::getPt2() const {
     return mPt2;
 }
 
 // 2. Settery
 
-void Segment::setPt1(Point pt1) {
+inline void Segment::setPt1(const Point pt1) {
     mPt1 = pt1;
 }
 
-void Segment::setPt2(Point pt2) {
+inline void Segment::setPt2(const Point pt2) {
     mPt2 = pt2;
 }
 
-void Segment::setSeg(Point pt1, Point pt2) {
+inline void Segment::setSeg(const Point pt1, const Point pt2) {
     mPt1 = pt1;
     mPt2 = pt2;
 }
@@ -48,9 +48,9 @@ istream& operator >> (istream& is, Segment& segment) {
 
 // 4. Konstruktory
 
-Segment::Segment() {
-    mPt1.setPoint(0, 0);
-    mPt2.setPoint(0, 0);
+Segment::Segment(const Point pt1, const Point pt2) {
+    setPt1(pt1);
+    setPt2(pt2);
 }
 
 Segment::Segment(double x1, double y1, double x2, double y2) {
