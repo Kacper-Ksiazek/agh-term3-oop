@@ -15,6 +15,9 @@ enum Subject {
 #define SUBJECTS_COUNT 7
 
 class Pupil : public Person {
+protected:
+    string m_ID;
+
 private:
     string m_className;
     double m_Ave;
@@ -22,8 +25,6 @@ private:
     static int m_BaseID;
 
     double m_Notes[SUBJECTS_COUNT];
-protected:
-    string m_ID;
 
 
 public:
@@ -48,7 +49,7 @@ public:
 
     inline void clearNotes();
 
-    inline void calcAve();
+    inline double calcAve();
 
     // Metody zwykle
     void printPupil();

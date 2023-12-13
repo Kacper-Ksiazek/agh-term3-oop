@@ -5,7 +5,7 @@
 
 class SchoolBoy : public Pupil {
 public:
-    SchoolBoy(string name, int age, string className, int average) : Pupil(name, age, className, average) {}
+    explicit SchoolBoy(string name, int age, string className, int average) noexcept;
 
     virtual ~SchoolBoy() = default;
 

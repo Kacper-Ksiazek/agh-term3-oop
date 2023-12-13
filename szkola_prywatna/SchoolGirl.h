@@ -2,13 +2,14 @@
 
 #include "Pupil.h"
 
-class SchoolBoy : public Pupil {
+class SchoolGirl : public Pupil {
 public:
-    SchoolBoy(string name, int age, string className, int average) : Pupil(name, age, className, average) {}
+    // Konstruktor
+    explicit SchoolGirl(string name, int age, string className, int average) noexcept;
 
-    virtual ~SchoolBoy() = default;
+    virtual ~SchoolGirl() = default;
 
-    SchoolBoy &operator=(const SchoolBoy &schoolGirlToCopy) = default;
+    SchoolGirl &operator=(const SchoolGirl &schoolGirlToCopy) = default;
 
     virtual void printOutfit() const override;
 };
