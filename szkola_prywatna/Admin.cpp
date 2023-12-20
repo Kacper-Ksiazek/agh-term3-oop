@@ -22,6 +22,9 @@ Admin::Admin(string name,
     m_Role = role;
 }
 
-double Admin::computeSalary() const {
-    return 0;
+double Admin::computeTax() const {
+    return Worker::computeTax(getSalary(),
+                              OPERATION_COSTS,
+                              TAX_FREE_ALLOWANCE,
+                              INCOME_TAX_RATE);
 }

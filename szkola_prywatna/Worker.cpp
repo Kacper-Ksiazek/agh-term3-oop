@@ -20,3 +20,12 @@ void Worker::setSalary(double salary) {
 void Worker::setWorkExperienceInYears(int workExperienceInYears) {
     m_workExperienceInYears = workExperienceInYears;
 }
+
+double Worker::computeTax(double grossSalary,
+                          double operationCosts,
+                          double taxFreeAllowance,
+                          double incomeTaxRate) {
+    double tax = ( grossSalary - operationCosts) * incomeTaxRate - taxFreeAllowance;
+
+    return tax > 0 ? tax : 0;
+}

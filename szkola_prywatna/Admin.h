@@ -23,7 +23,7 @@ public:
 
     string getRole() const;
 
-    double computeSalary() const override;
+    double computeTax() const override;
 };
 
 
