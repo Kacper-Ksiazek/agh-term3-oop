@@ -35,7 +35,7 @@ public:
 
 // Metody
 public:
-    void printSalary();
+    void printFinancialSummary() const;
 
 // Metody statyczne
     static double computeTax(double grossSalary,
@@ -43,9 +43,15 @@ public:
                              double taxFreeAllowance,
                              double incomeTaxRate);
 
+    static double computeNetIncome(double grossSalary,
+                                   double tax);
+
 // Metody wirutalne
 public:
     virtual double computeTax() const = 0;
+
+    virtual double getGrossIncome() const = 0;
+
 };
 
 

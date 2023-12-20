@@ -19,7 +19,7 @@ bool Teacher::isClassTeacher() const {
 }
 
 double Teacher::computeTax() const {
-    double gross = getSalary() + getBonusBasedOnExperience() + getBonusBasedOnBeingClassTeacher();
+    double gross = getGrossIncome();
     double operationCosts = getSalary() * 0.8 * 0.5 + OPERATION_COSTS;
 
     return Worker::computeTax(gross,
@@ -39,4 +39,8 @@ double Teacher::getBonusBasedOnExperience() const {
 
 double Teacher::getBonusBasedOnBeingClassTeacher() const {
     return isClassTeacher() ? BONUS_FOR_BEING_CLASS_TEACHER : 0;
+}
+
+double Teacher::getGrossIncome() const {
+    return getSalary() + getBonusBasedOnExperience() + getBonusBasedOnBeingClassTeacher();
 }

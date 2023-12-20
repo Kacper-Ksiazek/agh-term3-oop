@@ -24,6 +24,8 @@ public:
     string getRole() const;
 
     double computeTax() const override;
+
+    double getGrossIncome() const override;
 };
 
 

@@ -29,3 +29,19 @@ double Worker::computeTax(double grossSalary,
 
     return tax > 0 ? tax : 0;
 }
+
+double Worker::computeNetIncome(double grossSalary, double tax) {
+    return grossSalary - tax;
+}
+
+void Worker::printFinancialSummary() const {
+    double gross = getGrossIncome();
+    double tax = computeTax();
+    double net = computeNetIncome(gross, tax);
+
+    cout << "Pracownik: " << getName() << endl;
+    cout << "----------" << endl;
+    cout << "Kwota brutto: " << gross << endl;
+    cout << "Kwota podatku: " << tax << endl;
+    cout << "Kwota netto: " << net << endl;
+}

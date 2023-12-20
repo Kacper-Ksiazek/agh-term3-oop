@@ -28,3 +28,7 @@ double Admin::computeTax() const {
                               TAX_FREE_ALLOWANCE,
                               INCOME_TAX_RATE);
 }
+
+double Admin::getGrossIncome() const {
+    return getSalary();
+}
