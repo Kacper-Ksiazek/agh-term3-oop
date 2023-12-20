@@ -14,7 +14,7 @@ public:
 
     virtual ~Person() = default;
 
-    Person &operator=(const Person &personToCopy) = default;
+    virtual Person &operator=(const Person &personToCopy) = default;
 
     // Gettery
     int getAge() const;

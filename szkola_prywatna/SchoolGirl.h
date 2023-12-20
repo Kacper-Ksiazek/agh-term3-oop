@@ -3,15 +3,18 @@
 #include "Pupil.h"
 
 class SchoolGirl : public Pupil {
+
+// Konstruktor
 public:
-    // Konstruktor
-    explicit SchoolGirl(string name, int age, string className, int average) noexcept;
+    SchoolGirl(string name, int age, string className) noexcept;
 
-    virtual ~SchoolGirl() = default;
-
+// Operatory
+public:
     SchoolGirl &operator=(const SchoolGirl &schoolGirlToCopy) = default;
 
-    virtual void printOutfit() const override;
+// Metody
+public:
+    void printOutfit() override;
 };
 
 

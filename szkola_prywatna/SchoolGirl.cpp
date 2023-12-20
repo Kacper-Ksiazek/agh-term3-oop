@@ -1,11 +1,11 @@
 #include "SchoolGirl.h"
 
-SchoolGirl::SchoolGirl(string name, int age, string className, int average) noexcept: Pupil(name, age, className,
-                                                                                            average) {
+SchoolGirl::SchoolGirl(const string name, int age, const string className) noexcept: Pupil(name, age, className
+) {
     this->m_ID = "F_12345" + this->m_ID;
 }
 
-void SchoolGirl::printOutfit() const {
+void SchoolGirl::printOutfit() {
     cout << "biala bluzka z krawatem, szkolna marynarka, granatowa/czarna spodniczka, plaskie obuwie";
-}
 
+}

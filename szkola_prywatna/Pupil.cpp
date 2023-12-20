@@ -5,10 +5,18 @@
 // Statyczne pola klasy
 int Pupil::m_BaseID = 10000;
 
-Pupil::Pupil(string name, int age, string className, int average) noexcept: Person(name, age) {
-    m_className = className;
-    m_Ave = average;
+Pupil::Pupil(const string name, int age, const string className) noexcept
+        : m_className(className),
+          Person(name, age) {
+    // Wywołanie tej metody odpowiada za zaalokowanie pamięci na tablicę ocen
+    clearNotes();
+
+    // Wygenerowanie podstawy id
     m_ID = to_string(m_BaseID++);
+}
+
+Pupil::~Pupil() {
+    free(this->m_Notes);
 }
 
 string Pupil::getID() const {
@@ -23,21 +31,8 @@ double Pupil::getAve() const {
     return this->m_Ave;
 }
 
-void Pupil::setClassName(string className) {
+void Pupil::setClassName(const string className) {
     this->m_className = className;
-}
-
-void Pupil::setNote(Subject subject, double note) {
-    if (note < 2 || note > 5) {
-        cout << "Ocena musi byc z przedzialu 1-6" << endl;
-        exit(1);
-    }
-    if (subject < 0 || subject >= SUBJECTS_COUNT) {
-        cout << "Nie ma takiego przedmiotu" << endl;
-        exit(1);
-    }
-
-    this->m_Notes[subject] = note;
 }
 
 void Pupil::clearNotes() {
@@ -65,5 +60,22 @@ double Pupil::calcAve() {
 
 void Pupil::printPupil() {
     cout << getID() << ' ' << getName() << ' ' << " (" << getClassName() << "),  " << getAge() << " lat" << endl;
+    cout << "average=" << calcAve() << endl;
+    cout << "outfit: ";
+    printOutfit();
+}
+
+void Pupil::setNote(Subject subject, double note) {
+    if (note < 2 || note > 5) {
+        cout << "Ocena musi byc z przedzialu 1-6" << endl;
+        exit(1);
+    }
+    if (subject < 0 || subject >= SUBJECTS_COUNT) {
+        cout << "Nie ma takiego przedmiotu" << endl;
+        exit(1);
+    }
+
+    this->m_Notes[subject] = note;
+
 }
 

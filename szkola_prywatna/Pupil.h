@@ -15,47 +15,60 @@ enum Subject {
 #define SUBJECTS_COUNT 7
 
 class Pupil : public Person {
+
 protected:
+    // Id osoby
     string m_ID;
 
 private:
-    string m_className;
-    double m_Ave;
-
+    // Baza do generowania ID
     static int m_BaseID;
 
+    // Klasa do ktorej uczeszcza uczen
+    string m_className;
+
+    // Srednia ocen
+    double m_Ave = 0;
+
+    // Tablica ocen, w kolejnosci jak w enumie Subject
     double m_Notes[SUBJECTS_COUNT];
 
 
 public:
     // Konstruktor
-    explicit Pupil(string name, int age, string className, int average) noexcept;
+    Pupil(string name, int age, string className) noexcept;
 
-    virtual ~Pupil() = default;
+    // Destruktor
+    virtual ~Pupil();
 
-    Person &operator=(const Person &personToCopy) = default;
 
-    // Gettery
+// Gettery
+public:
     inline string getID() const;
 
     inline string getClassName() const;
 
     inline double getAve() const;
 
-    // Settery
+// Settery
+public:
+    // Ustawia klase do ktorej uczeszcza uczen
     inline void setClassName(string className);
 
-    inline void setNote(Subject subject, double note);
+    // Ustawia ocene z konkretnego przedmiotu
+    void setNote(Subject subject, double note);
 
+// Metody zwyczajne
+public:
     inline void clearNotes();
 
     inline double calcAve();
 
-    // Metody zwykle
     void printPupil();
 
-    // Metody wirtualne
-    virtual void printOutfit() const;
+// Metody wirtualne
+public:
+    virtual void printOutfit() = 0;
 };
 
 

@@ -4,14 +4,18 @@
 
 
 class SchoolBoy : public Pupil {
+
+// Konstruktor
 public:
-    explicit SchoolBoy(string name, int age, string className, int average) noexcept;
+    SchoolBoy(string name, int age, string className) noexcept;
 
-    virtual ~SchoolBoy() = default;
-
+// Operatory
+public:
     SchoolBoy &operator=(const SchoolBoy &schoolGirlToCopy) = default;
 
-    virtual void printOutfit() const override;
+// Metody
+public:
+    void printOutfit() override;
 };
 
 
