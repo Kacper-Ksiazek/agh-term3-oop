@@ -9,13 +9,21 @@ enum Role {
 };
 
 class Admin : public Worker {
+// Wlasciwosci
 private:
     Role m_Role;
-
-// Gettery
+// Konsktruktor
 public:
+    Admin(string name,
+          int age,
+          double salary,
+          int workExperienceInYears,
+          Role role
+    ) noexcept;
+
     string getRole() const;
 
+    double computeSalary() const override;
 };
 
 

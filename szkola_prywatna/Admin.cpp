@@ -10,3 +10,18 @@ string Admin::getRole() const {
             return "starszy specjalista";
     }
 }
+
+Admin::Admin(string name,
+             int age,
+             double salary,
+             int workExperienceInYears,
+             Role role) noexcept: Worker(name,
+                                         age,
+                                         salary,
+                                         workExperienceInYears) {
+    m_Role = role;
+}
+
+double Admin::computeSalary() const {
+    return 0;
+}
