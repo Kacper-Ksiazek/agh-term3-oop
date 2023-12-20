@@ -14,13 +14,14 @@ Teacher::Teacher(string name,
     m_className = className;
 }
 
+
 bool Teacher::isClassTeacher() const {
     return m_className != EMPTY_CLASS_NAME;
 }
 
 double Teacher::computeTax() const {
     double gross = getGrossIncome();
-    double operationCosts = getSalary() * 0.8 * 0.5 + OPERATION_COSTS;
+    double operationCosts = gross * 0.8 * 0.5;
 
     return Worker::computeTax(gross,
                               operationCosts,

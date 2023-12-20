@@ -16,7 +16,7 @@ public:
 
 // Destruktor
 public:
-    virtual ~Worker();
+    virtual ~Worker() = default;
 
 // Operatory
     Worker &operator=(const Worker &personToCopy) = default;

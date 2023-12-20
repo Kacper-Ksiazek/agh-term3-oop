@@ -1,6 +1,6 @@
 #include "Worker.h"
 
-Worker::Worker(string name, int age, double salary, int workExperienceInYears) noexcept: Person(name, age), {
+Worker::Worker(string name, int age, double salary, int workExperienceInYears) noexcept: Person(name, age) {
     m_Salary = salary;
     m_workExperienceInYears = workExperienceInYears;
 }
@@ -25,7 +25,7 @@ double Worker::computeTax(double grossSalary,
                           double operationCosts,
                           double taxFreeAllowance,
                           double incomeTaxRate) {
-    double tax = ( grossSalary - operationCosts) * incomeTaxRate - taxFreeAllowance;
+    double tax = (grossSalary - operationCosts) * incomeTaxRate - taxFreeAllowance;
 
     return tax > 0 ? tax : 0;
 }
