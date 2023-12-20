@@ -3,6 +3,7 @@
 #include "Pupil.h"
 #include "Worker.h"
 
+#define BONUS_FOR_BEING_CLASS_TEACHER 400.0
 #define EMPTY_CLASS_NAME "NONE"
 
 class Teacher : public Worker {
@@ -20,7 +21,12 @@ public:
 
     bool isClassTeacher() const;
 
-    double computeSalary() const override;
+    double computeTax() const override;
+
+private:
+    double getBonusBasedOnExperience() const;
+
+    double getBonusBasedOnBeingClassTeacher() const;
 };
 
 
