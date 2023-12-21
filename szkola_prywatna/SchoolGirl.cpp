@@ -7,5 +7,4 @@ SchoolGirl::SchoolGirl(const string name, int age, const string className) noexc
 
 void SchoolGirl::printOutfit() {
     cout << "biala bluzka z krawatem, szkolna marynarka, granatowa/czarna spodniczka, plaskie obuwie";
-
 }

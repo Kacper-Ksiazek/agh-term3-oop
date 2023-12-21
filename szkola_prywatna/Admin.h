@@ -9,9 +9,11 @@ enum Role {
 };
 
 class Admin : public Worker {
+
 // Wlasciwosci
 private:
     Role m_Role;
+
 // Konsktruktor
 public:
     Admin(string name,
@@ -21,9 +23,15 @@ public:
           Role role
     ) noexcept;
 
-    string getRole() const;
+// Settery
+public:
+    void setRole(Role role);
 
-    double computeTax() const override;
+public:
+// Implementacja metod wirtualnych
+    string getJobPosition() const override;
+
+    double getPIT() const override;
 
     double getGrossIncome() const override;
 };

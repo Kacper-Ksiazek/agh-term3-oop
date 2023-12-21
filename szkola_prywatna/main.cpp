@@ -1,66 +1,108 @@
-#include <iostream>
+//
+// ⚠️ WAZNE:
+// Testy do czesci pierwszej- tej z SchoolGirl i SchoolBoy znajduja sie w pliku "part_1_main.txt"
+//
 
-#include "SchoolBoy.h"
-#include "SchoolGirl.h"
+#include <iostream>
 
 #include "Admin.h"
 #include "Teacher.h"
 
-#define MAXPUPIL 9 // 9 pupili w klasie (tablicy)
 
 using namespace std;
 
-void printPupils(Pupil **tab, int size);
+#define WORKERS_COLLECTION_SIZE 9
 
-void sortPupils(Pupil **tab, int size);
+void printWorkersCollection(Worker **workers);
+
 
 int main() {
-//    Pupil *pupils[MAXPUPIL] = {nullptr};
-//    Pupil *v = nullptr;
-//
-//    pupils[0] = v = new SchoolGirl("Jablko Anna", 12, "3A");
-//
-//    v->setNote(POLSKI, 4);
-//    v->setNote(MATEMATYKA, 3);
-//    v->setNote(FIZYKA, 3);
-//    v->setNote(CHEMIA, 5);
-//    v->setNote(INFORMATYKA, 5);
-//    v->setNote(ANGIELSKI, 4);
-//
-////    sortPupils(pupils, 1);
-//    printPupils(pupils, 1);
+    Worker *workersCollection[9] = {nullptr};
 
-    Worker *ekipa[9] = {nullptr};
-
-    Teacher *Maro = new Teacher(
-            "Maro",
+    workersCollection[0] = new Teacher(
+            "Jan Kowalski",
             30,
             9000,
             30,
-            POLSKI
+            POLSKI,
+            "4Tic"
     );
 
-    Maro->printFinancialSummary();
+    workersCollection[1] = new Teacher(
+            "Piotr Wisniewski",
+            35,
+            2400,
+            28,
+            ANGIELSKI
+    );
 
+    workersCollection[2] = new Teacher(
+            "Michal Lewandowski",
+            40,
+            10000,
+            32,
+            CHEMIA,
+            "5D"
+    );
+
+    workersCollection[3] = new Admin(
+            "Adam Kowalski",
+            30,
+            6500,
+            30,
+            MLODSZY_SPECJALISTA
+    );
+
+    workersCollection[4] = new Teacher(
+            "Anna Nowak",
+            28,
+            8500,
+            25,
+            MATEMATYKA
+    );
+
+    workersCollection[5] = new Teacher(
+            "Katarzyna Dabrowska",
+            32,
+            1400,
+            27,
+            FIZYKA,
+            "1C"
+    );
+
+    workersCollection[6] = new Admin(
+            "Adam Nowak",
+            28,
+            8500,
+            25,
+            SPECJALISTA
+    );
+
+    workersCollection[7] = new Admin(
+            "Kacper Wisniewski",
+            35,
+            4700,
+            28,
+            STARSZY_SPECJALISTA
+    );
+
+    workersCollection[8] = new Teacher(
+            "Magdalena Zajac",
+            29,
+            8700,
+            26,
+            INFORMATYKA
+    );
+
+
+    printWorkersCollection(workersCollection);
 
     return 0;
 }
 
-void printPupils(Pupil **tab, int size) {
-    for (int i = 0; i < size; i++) {
-        tab[i]->printPupil();
-    }
-}
-
-void sortPupils(Pupil **tab, int size) {
-    for (int i = 0; i < size; i++) {
-        int j = i - 1;
-        Pupil *v = tab[i];
-
-        while (j > 0 && tab[j]->getName() < v->getName()) {
-            tab[j + 1] = tab[j--];
-        }
-
-        tab[j + 1] = v;
+void printWorkersCollection(Worker **workers) {
+    for (int i = 0; i < WORKERS_COLLECTION_SIZE; i++) {
+        workers[i]->print();
+        cout << endl << endl;
     }
 }

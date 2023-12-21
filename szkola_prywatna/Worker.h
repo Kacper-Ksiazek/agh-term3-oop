@@ -8,7 +8,7 @@
 
 class Worker : public Person {
 private:
-    double m_Salary;
+    double m_Salary; // Wynagrodzenie podstawowe brutto
     int m_workExperienceInYears;
 // Konstruktor
 public:
@@ -35,6 +35,11 @@ public:
 
 // Metody
 public:
+    // Wyswietla informacje o pracowniku: imie + nazwisko, stanowisko
+    void print() const;
+
+    void printPersonalDetails() const;
+
     void printFinancialSummary() const;
 
 // Metody statyczne
@@ -48,10 +53,14 @@ public:
 
 // Metody wirutalne
 public:
-    virtual double computeTax() const = 0;
+    // Oblicza i zwraca Personal Income Tax
+    virtual double getPIT() const = 0;
 
+    // Oblicza i zwraca zarobki brutto z uwzglednieniem dodatkow takich jak premia za staz, premia za wychowawstwo itp.
     virtual double getGrossIncome() const = 0;
 
+    // Zwraca dokladnie na jakim stanowisku pracuje dana osoba
+    virtual string getJobPosition() const = 0;
 };
 
 

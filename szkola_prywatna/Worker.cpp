@@ -36,12 +36,21 @@ double Worker::computeNetIncome(double grossSalary, double tax) {
 
 void Worker::printFinancialSummary() const {
     double gross = getGrossIncome();
-    double tax = computeTax();
+    double tax = getPIT();
     double net = computeNetIncome(gross, tax);
 
-    cout << "Pracownik: " << getName() << endl;
-    cout << "----------" << endl;
-    cout << "Kwota brutto: " << gross << endl;
-    cout << "Kwota podatku: " << tax << endl;
-    cout << "Kwota netto: " << net << endl;
+    cout << "Zarobki: " << endl;
+    cout << "- kwota brutto: " << gross << " pln" << endl;
+    cout << "- podatek dochodowy: " << tax << " pln" << endl;
+    cout << "- kwota netto: " << net << " pln" << endl;
+}
+
+void Worker::printPersonalDetails() const {
+    cout << "Imie i nazwisko: " << this->getName() << endl;
+    cout << "Stanowisko: " << this->getJobPosition() << endl;
+}
+
+void Worker::print() const {
+    this->printPersonalDetails();
+    this->printFinancialSummary();
 }
