@@ -1,14 +1,17 @@
 #include <iostream>
 
+#include "FifoItem.h"
 #include "global.h"
 #include "FQueue.h"
+#include "FifoException.h"
 
 using namespace std;
 
 // ⚠️ WAZNA INFORMACJA ⚠️
-// W pliku FQueue.h znajdują się zarówno DEKLARACJE jak i DEFINICJE metod WSZYSTKICH 3 klas.
-// Ze wzgledu na wymog zadania polegajacy na utworzeniu 3 klas w jednym pliku, clion wariuje i nie kompiluje biedak.
-
+//
+// Jest to ALTERNATYWNA wersja zadania z wykorzystaniem MOJEJ struktury plikow.
+// Doslownie JEDYNA roznica to rozdzielenie ~200 linijek z pliku naglowkowego na lacznie 4 pliki.
+//
 
 void printFQueue(FQueue *queue);
 void printSeparator();
