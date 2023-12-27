@@ -7,7 +7,7 @@
 
 #include "CUtils.h"
 
-Time::Time(const Time &time) {
+Time::Time(const Time& time) {
     *this = time;
 }
 
@@ -15,16 +15,16 @@ Time::Time(int hour, int minute, int second) {
     setTime(hour, minute, second);
 }
 
-ostream &operator<<(ostream &os, const Time &time) {
+ostream& operator<<(ostream& os, const Time& time) {
     os << std::setfill('0') << std::setw(2) << time.getHour() << ":"
-       << std::setw(2) << time.getMinute() << ":" << std::setw(2) << time.getSecond();
+        << std::setw(2) << time.getMinute() << ":" << std::setw(2) << time.getSecond();
     return os;
 }
 
-istream &operator>>(istream &is, Time &time) {
-    unsigned short *dataFromUser = Utils::readDateFromUser("Podaj czas w hh:mm:ss formacie", ':', true);
+istream& operator>>(istream& is, Time& time) {
+    unsigned short* dataFromUser = Utils::readDateFromUser("Podaj czas w hh:mm:ss formacie", ':', true);
 
-    if ( dataFromUser == nullptr ) throw runtime_error("Invalid time format!");
+    if (dataFromUser == nullptr) throw runtime_error("Invalid time format!");
 
     int hour, minute, second;
     hour = dataFromUser[0], minute = dataFromUser[1], second = dataFromUser[2];
@@ -106,4 +106,3 @@ void Time::readTime() {
 
     setTime(hour, minute, second);
 }
-

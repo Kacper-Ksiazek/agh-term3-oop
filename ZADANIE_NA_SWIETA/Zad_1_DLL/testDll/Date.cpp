@@ -10,7 +10,7 @@
 using namespace std;
 
 
-Date::Date(const Date &date) {
+Date::Date(const Date& date) {
     setDate(date.getDay(), date.getMonth(), date.getYear());
 }
 
@@ -64,16 +64,16 @@ void Date::printDate() {
     printf("%d.%d.%d\n", mDay, mMonth, mYear);
 }
 
-ostream &operator<<(ostream &os, const Date &date) {
+ostream& operator<<(ostream& os, const Date& date) {
     os << setfill('0')
-        <<setw(2) << date.getDay() << ":"
-        <<setw(2) << date.getMonth() << ":"
-        <<setw(4) << date.getYear();
+        << setw(2) << date.getDay() << ":"
+        << setw(2) << date.getMonth() << ":"
+        << setw(4) << date.getYear();
     return os;
 }
 
-istream &operator>>(istream &is, Date &date) {
-    unsigned short *p = Utils::readDateFromUser("Podaj date w formacie dd/mm/yyyy", '/', true);
+istream& operator>>(istream& is, Date& date) {
+    unsigned short* p = Utils::readDateFromUser("Podaj date w formacie dd/mm/yyyy", '/', true);
     date.setDate(p[0], p[1], p[2]);
 
     return is;

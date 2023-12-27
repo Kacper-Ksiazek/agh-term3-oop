@@ -1,20 +1,17 @@
-#include "pch.h"
 #include "testDll.h"
-
-#include <iostream>
 
 #include "DateTime.h"
 
 using namespace std;
 
 int main() {
-    Date d(9,12,2023);
+    Date d(9, 12, 2023);
     cout << "d= " << d << endl;
 
-    Time t(22,10,24);
+    Time t(22, 10, 24);
     cout << "t= " << t << endl;
 
-    DateTime dt(d,t);
+    DateTime dt(d, t);
     cout << "Dt = " << dt << endl;
 
     DateTime dt2 = dt; // Test operatora podstawiania
