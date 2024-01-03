@@ -1,8 +1,55 @@
 #pragma once
 
 #include <iostream>
-#include "FifoItem.h"
-#include "FifoException.h"
+
+#define FIFO_ALLOCATION_ERROR  0x01
+#define FIFO_QUEUE_EMPTY 0x04
+#define OTHER_ERROR      0x10
+
+// ===================================
+// Wcześniejsze deklaracje, zeby mozna bylo zadeklarowac przyjaciela
+// 1.
+class FifoException;
+
+// 2.
+template<typename T>
+class FQueue;
+
+// 3.
+template<typename T>
+class FifoItem;
+// ===================================
+
+//
+// Klasa do obslugi wyjatkow
+//
+class FifoException {
+    // Wlasnosci
+public:
+    int errCode;
+
+    // Konstruktor
+public:
+    inline FifoException(int iErrorCode = OTHER_ERROR) : errCode(iErrorCode) {};
+
+    // Metody
+public:
+    // Metoda wyswietlajaca powod bledu i konczaca dzialanie programu
+    inline char *getReason() const {
+        // Bez tego rzutowania program mi sie nie kompilowal i CLION krzyczal:
+        // ``` ISO C++11 does not allow conversion from string literal to 'char *' ```
+        switch (this->errCode) {
+            case FIFO_ALLOCATION_ERROR:
+                return (char *) "ERROR: Nie udalo sie zaalokowac pamieci dla kolejki FIFO";
+
+            case FIFO_QUEUE_EMPTY:
+                return (char *) "ERROR: Kolejka FIFO jest pusta";
+
+            default:
+                return (char *) "ERROR: Nieznany blad";
+        }
+    }
+};
 
 using namespace std;
 
@@ -16,17 +63,61 @@ static void handleFifoException(FifoException *exception) {
 // ===================================
 
 //
+// Klasa pomocnicza reprezentujaca element kolejki FIFO
+//
+template<typename T>
+class FifoItem {
+// Przyjaciele
+friend class FQueue<T>;
+
+// Wlasciwosci
+private:
+    T *m_pItem;
+    FifoItem<T> *m_pNext;
+
+// Konstruktory i destruktory
+private:
+    // Konstruktor domyslny
+    inline FifoItem(T *pItem = nullptr) : m_pItem(pItem), m_pNext(nullptr) {};
+
+    // Konstruktor kopiujacy
+    inline FifoItem(const FifoItem<T> &item) : m_pItem(item.m_pItem), m_pNext(item.m_pNext) {};
+
+    // Destruktor
+    inline virtual ~FifoItem() = default;
+
+// Gettery i settery
+private:
+    inline T *getItem() const {
+        return this->m_pItem;
+    }
+
+    inline void setItem(T *pItem) {
+        this->m_pItem = pItem;
+    }
+
+    inline FifoItem<T> *getNext() const {
+        return this->m_pNext;
+    }
+
+    inline void setNext(FifoItem<T> *pNext) {
+        this->m_pNext = pNext;
+    }
+};
+
+//
 // Klasa reprezentujaca kolejke FIFO
 //
 
-template <typename T>
+template<typename T>
 class FQueue {
-    // Wlasciwosci
+
+// Wlasciwosci
 private:
     FifoItem<T> *m_pHead;
     FifoItem<T> *m_pTail;
 
-    // Konstruktory i destruktory
+// Konstruktory i destruktory
 public:
     // Konstruktor domyslny
     inline FQueue() {
@@ -43,8 +134,8 @@ public:
     // Destruktor
     inline virtual ~FQueue() = default;
 
-    // Gettery i settery
-public:
+// Gettery i settery
+private:
     inline FifoItem<T> *getHead() const {
         return this->m_pHead;
     }
@@ -116,7 +207,7 @@ public:
 
 // Prywatne metody obslugi kolejki
 private:
-    // Metoda ktora kasuje pierwszy do odczytu element z kolejki
+    // Metoda ktora kasuje pierwszy do odczytu element z kolejki ( tylko 1 element )
     inline void FQDel() {
         // Jesli kolejka jest pusta to nie ma co usuwac
         if (this->FQEmpty()) handleFifoException(new FifoException(FIFO_QUEUE_EMPTY));
@@ -132,6 +223,19 @@ private:
 
         // Sprawdzamy czy kolejka jest pusta i jesli tak to ustawiamy ogon na nullptr
         if (this->FQEmpty()) this->setTail(nullptr);
+    }
+
+// Autorskie metody publiczne
+public:
+    void printQueue(){
+        cout << "Zawartosc kolejki: " << endl;
+        FifoItem<T> *item = this->getHead();
+
+        int i = 0;
+        while (item != nullptr) {
+            cout << ++i << ". " << *item->getItem() << endl;
+            item = item->getNext();
+        }
     }
 };
 
