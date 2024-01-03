@@ -1,16 +1,29 @@
 #pragma once
 
+#include "global.h"
+
 #define FIFO_ALLOCATION_ERROR  0x01
 #define FIFO_QUEUE_EMPTY 0x04
 #define OTHER_ERROR      0x10
 
-#include "global.h"
+// ===================================
+// Wcześniejsze deklaracje, zeby mozna bylo zadeklarowac przyjaciela
+// 1.
+class FifoException;
 
+// 2.
+class FQueue;
+
+// 3.
+class FifoItem;
+// ===================================
 
 //
 // Klasa pomocnicza reprezentujaca element kolejki FIFO
 //
 class FifoItem {
+// Przyjaciele
+friend class FQueue;
 
 // Wlasciwosci
 private:
@@ -18,7 +31,7 @@ private:
     FifoItem *m_pNext;
 
 // Konstruktory i destruktory
-public:
+private:
     // Konstruktor domyslny
     inline FifoItem(FQINFO *pItem = nullptr) : m_pItem(pItem), m_pNext(nullptr) {};
 
@@ -29,7 +42,7 @@ public:
     inline virtual ~FifoItem() = default;
 
 // Gettery i settery
-public:
+private:
     inline FQINFO *getItem() const {
         return this->m_pItem;
     }
@@ -116,7 +129,7 @@ public:
     inline virtual ~FQueue() = default;
 
     // Gettery i settery
-public:
+private:
     inline FifoItem *getHead() const {
         return this->m_pHead;
     }
@@ -204,6 +217,19 @@ private:
 
         // Sprawdzamy czy kolejka jest pusta i jesli tak to ustawiamy ogon na nullptr
         if (this->FQEmpty()) this->setTail(nullptr);
+    }
+
+// Autorskie metody publiczne
+public:
+    void printQueue() const {
+        cout << "Zawartosc kolejki: " << endl;
+        FifoItem *item = this->getHead();
+
+        int i = 0;
+        while (item != nullptr) {
+            cout << ++i << ". " << *item->getItem() << endl;
+            item = item->getNext();
+        }
     }
 };
 

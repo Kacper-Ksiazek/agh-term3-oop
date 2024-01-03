@@ -5,12 +5,6 @@
 
 using namespace std;
 
-// ⚠️ WAZNA INFORMACJA ⚠️
-// W pliku FQueue.h znajdują się zarówno DEKLARACJE jak i DEFINICJE metod WSZYSTKICH 3 klas.
-// Ze wzgledu na wymog zadania polegajacy na utworzeniu 3 klas w jednym pliku, clion wariuje i nie kompiluje biedak.
-
-
-void printFQueue(FQueue *queue);
 void printSeparator();
 
 
@@ -22,35 +16,25 @@ int main() {
     queue->FQEnqueue(new FQINFO(3, 7, 8));
     queue->FQEnqueue(new FQINFO(4, 9, 10));
 
-    printFQueue(queue);
+    queue->printQueue();
 
     auto zdjetyElement = queue->FQDequeue();
 
     printSeparator();
     cout << "Zdjety element: " << *zdjetyElement << endl;
 
-    printFQueue(queue);
+    queue->printQueue();
 
 
     printSeparator();
     cout << "Wywolanie funkcji FQClear" << endl;
     queue->FQClear();
 
-    printFQueue(queue);
+    queue->printQueue();
 
     return 0;
 }
 
-void printFQueue(FQueue *queue) {
-    cout << "Zawartosc kolejki: " << endl;
-    FifoItem *item = queue->getHead();
-
-    int i = 0;
-    while (item != nullptr) {
-        cout << ++i << ". " << *item->getItem() << endl;
-        item = item->getNext();
-    }
-}
 void printSeparator() {
     cout << endl << "============================" << endl;
 }
